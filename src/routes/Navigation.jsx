@@ -1,9 +1,9 @@
 import React, { Fragment } from 'react'
 import { Link, Outlet, useNavigate } from 'react-router-dom'
 import images from '~/assets/image'
-import SearchInput from '../../components/SearchInput'
-import Button from '../../components/Button'
-import CartIcon from '../../components/CartIcon'
+import SearchInput from '../components/SearchInput'
+import Button from '../components/Button'
+import CartIcon from '../components/CartIcon'
 function Navigation() {
   const { logo, brand, location, searchIcon, userLogin } = images
   const navigate = useNavigate()
@@ -26,6 +26,7 @@ function Navigation() {
           </div>
           <div className='flex items-center justify-between'>
             <SearchInput icon={searchIcon} placeholder="Search Food" />
+            <Link to='booking' images={userLogin} children="Booking" className="flex items-center text-amber-500 px-3 py-2 rounded-lg font-bold shadow-md shadow-orange-300 hover:bg-orange-200 hover:text-white ml-4 " />
             <Button onClick={goToLogin} images={userLogin} children="Login" className="flex items-center text-amber-500 px-3 py-2 rounded-lg font-bold shadow-md shadow-orange-300 hover:bg-orange-200 hover:text-white ml-4 " />
             <CartIcon />
           </div>

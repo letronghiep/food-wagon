@@ -3,7 +3,7 @@ import blockBoxs from '~/data/blockBox'
 import DealCard from './DealCard'
 function BlockBox() {
     return (
-        <section id='block-box' className='bg-orange-50'>
+        <section id='block-box' className='bg-amber-50'>
             <div className='container max-w-7xl mx-auto'>
                 <h1 className='text-center font-bold text-5xl text-orange-500 mt-6'>How does it work</h1>
                 <div className='grid grid-cols-4 mt-14 px-36 gap-x-4'>

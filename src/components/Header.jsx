@@ -54,7 +54,7 @@ function Header() {
                         </div>
                     </div>
                     <div className='-mb-10'>
-                        <img className='hover:-translate-y-14 transition-all' src={overLayHeader} alt='' width="520px" height="520px" />
+                        <img className='hover:-translate-y-14 transition-transform' src={overLayHeader} alt='' width="520px" height="520px" />
 
                     </div>
                 </div>
