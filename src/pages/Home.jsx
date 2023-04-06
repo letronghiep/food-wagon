@@ -7,7 +7,7 @@ import PopularItems from '~/components/PopularItems'
 
 function Home() {
     return (
-        <div className='container'>
+        <div className=''>
             <Header />
             <FlashDeal />
             <BlockBox />
