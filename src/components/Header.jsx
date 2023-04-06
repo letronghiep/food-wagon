@@ -32,7 +32,7 @@ function Header() {
         setActive(id);
     }
     return (
-        <div className='header-group overflow-hidden'>
+        <div className='header-group overflow-hidden mt-[72px]'>
             <div className='container max-w-7xl mx-auto my-auto pt-28'>
                 <div className='flex justify-between'>
                     <div>

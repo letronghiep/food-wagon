@@ -12,7 +12,7 @@ function Navigation() {
   }
   return (
     <Fragment>
-      <div id='nav-bar' className='shadow-md bg-white'>
+      <div id='nav-bar' className='shadow-md bg-white fixed top-0 left-0 right-0 z-10'>
         <div className='mx-auto container max-w-7xl py-4 flex items-center justify-between'>
           <Link to='/' className='flex w-44 h-auto'>
             <img src={logo} alt="" />
@@ -26,13 +26,13 @@ function Navigation() {
           </div>
           <div className='flex items-center justify-between'>
             <SearchInput icon={searchIcon} placeholder="Search Food" />
-            <Link to='booking' images={userLogin} children="Booking" className="flex items-center text-amber-500 px-3 py-2 rounded-lg font-bold shadow-md shadow-orange-300 hover:bg-orange-200 hover:text-white ml-4 " />
+            <Link to='/booking' images={userLogin} children="Booking" className="flex items-center text-amber-500 px-3 py-2 rounded-lg font-bold shadow-md shadow-orange-300 hover:bg-orange-200 hover:text-white ml-4 " />
             <Button onClick={goToLogin} images={userLogin} children="Login" className="flex items-center text-amber-500 px-3 py-2 rounded-lg font-bold shadow-md shadow-orange-300 hover:bg-orange-200 hover:text-white ml-4 " />
             <CartIcon />
           </div>
         </div>
       </div>
-      <Outlet />
+      {/* <Outlet /> */}
     </Fragment>
   )
 }

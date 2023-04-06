@@ -1,39 +1,31 @@
 import React from 'react'
 import { ChevronRight, ChevronLeft } from '@mui/icons-material'
-import listTitles from '~/title'
+
+
+import listTitles from '~/data/title'
 import CardPreview from './CardPreview'
+import Carousel from 'better-react-carousel'
 function PopularItems() {
-    // const categories = foods.reduce((acc, category) => {
-    //     const { titles, items } = category;
-    //     acc[titles.toLowerCase()] = items;
-    //     return acc;
-    // }, {})
     return (
-        <section id="popular-items" className='bg-gray-50'>
+        <div id="popular-items" className='bg-gray-100 py-12'>
             <div className='container mx-auto max-w-7xl'>
                 <h1 className='font-bold text-center text-5xl text-gray-700 mt-16 mb-12'>Popular items</h1>
-                <div className='flex items-center justify-between'>
-                    <span className='bg-orange-500 text-white p-2 rounded-full mb-2.5 cursor-pointer'>
-                        <ChevronLeft className='text-lg' />
-                    </span>
-                    <div className='w-full overflow-hidden'>
-                        <ul className='w-[120%] flex justify-between items-center gap-x-2'>
-                            {
-                                listTitles.map(card => (
-                                    <li className='flex-1' key={card.id}>
-                                        <CardPreview card={card} />
-                                    </li>
-                                ))
-                            }
+                {/* <div className='flex items-center justify-between'> */}
 
-                        </ul>
-                    </div>
-                    <span className='bg-orange-500 text-white p-2 rounded-full mb-2.5 cursor-pointer'>
-                        <ChevronRight />
-                    </span>
-                </div>
+                <Carousel cols={5} gap={4} arrowLeft={<span className='absolute top-1/2 -translate-y-[50%] left-0 z-10 bg-orange-500 text-white p-2 rounded-full mb-2.5 cursor-pointer'>
+                    <ChevronLeft />
+                </span>} arrowRight={<span className='absolute top-1/2 -translate-y-1/2 right-0 bg-orange-500 text-white p-2 rounded-full mb-2.5 cursor-pointer'>
+                    <ChevronRight />
+                </span>}>
+                    {listTitles.map(card => (
+                        <Carousel.Item className='flex-1' key={card.id}>
+                            <CardPreview card={card} />
+                        </Carousel.Item>
+                    ))}
+                </Carousel>
+                {/* </div> */}
             </div>
-        </section>
+        </div>
     )
 }
 
