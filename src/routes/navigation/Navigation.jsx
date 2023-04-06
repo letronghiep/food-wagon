@@ -3,7 +3,6 @@ import { Link, Outlet, useNavigate } from 'react-router-dom'
 import images from '~/assets/image'
 import SearchInput from '../../components/SearchInput'
 import Button from '../../components/Button'
-import CartIcon from '../../components/CartIcon'
 function Navigation() {
   const { logo, brand, location, searchIcon, userLogin } = images
   const navigate = useNavigate()
@@ -24,10 +23,9 @@ function Navigation() {
             <span className='mx-2'>Current Location: </span>
             <span className='font-bold'>HaNoi, VietNam</span>
           </div>
-          <div className='flex items-center justify-between'>
+          <div className='flex items-center'>
             <SearchInput icon={searchIcon} placeholder="Search Food" />
             <Button onClick={goToLogin} images={userLogin} children="Login" className="flex items-center text-amber-500 px-3 py-2 rounded-lg font-bold shadow-md shadow-orange-300 hover:bg-orange-200 hover:text-white ml-4 " />
-            <CartIcon />
           </div>
         </div>
       </div>
