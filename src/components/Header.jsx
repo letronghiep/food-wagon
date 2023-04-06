@@ -36,7 +36,7 @@ function Header() {
         setActive(id)
     }
     return (
-        <div className='header-group'>
+        <div className='header-group overflow-hidden'>
             <div className='container max-w-7xl mx-auto my-auto pt-28'>
                 <div className='flex justify-between'>
                     <div>
@@ -57,7 +57,10 @@ function Header() {
                             </div>
                         </div>
                     </div>
-                    <img src={overLayHeader} alt='' width="380px" height="380px" className='mt-6' />
+                    <div className='-mb-10'>
+                        <img className='hover:-translate-y-14 transition-all' src={overLayHeader} alt='' width="520px" height="520px" />
+
+                    </div>
                 </div>
 
             </div>

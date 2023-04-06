@@ -4,9 +4,12 @@ module.exports = {
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
-    backgroundImage: {
-      'login-btn': "linear-gradient(to bottom, rgba(255, 174, 0, 0.29), rgba(255, 174, 0, 0.26)) ",
-    },
+    extend: {
+      backgroundImage: {
+        'login-btn': "linear-gradient(to bottom, rgba(255, 174, 0, 0.29), rgba(255, 174, 0, 0.26))",
+        
+      },
+    }
 
   },
   extend: {
