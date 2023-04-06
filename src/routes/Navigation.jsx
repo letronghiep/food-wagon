@@ -26,12 +26,13 @@ function Navigation() {
           </div>
           <div className='flex items-center justify-between'>
             <SearchInput icon={searchIcon} placeholder="Search Food" />
+            <Link to="booking" children="Booking" className="flex items-center text-amber-500 px-3 py-2 rounded-lg font-bold shadow-md shadow-orange-300 hover:bg-orange-200 hover:text-white ml-4 " />
             <Button onClick={goToLogin} images={userLogin} children="Login" className="flex items-center text-amber-500 px-3 py-2 rounded-lg font-bold shadow-md shadow-orange-300 hover:bg-orange-200 hover:text-white ml-4 " />
             <CartIcon />
           </div>
         </div>
       </div>
-      <Outlet />
+      {/* <Outlet /> */}
     </Fragment>
   )
 }

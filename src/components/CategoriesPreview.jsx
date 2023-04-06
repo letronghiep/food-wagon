@@ -4,16 +4,13 @@ import { selectCategoriesMap } from '../store/categories/selectCategories'
 import CategoryPreview from './CategoryPreview';
 
 function CategoriesPreview() {
-    const categoriesMap = useSelector(selectCategoriesMap);
+    const categories = useSelector(selectCategoriesMap)
     return (
-        <div>
-            {
-                Object.keys(categoriesMap).map((title, index) => {
-                    const products = categoriesMap[title];
-
-                    return <CategoryPreview products={products} title={title} key={index} />
-                })
-            }
+        <div className='max-w-7xl mx-auto container my-[72px]'>
+            {Object.keys(categories).map(title => {
+                const products = categories[title];
+                return <CategoryPreview key={title} products={products} title={title} />
+            })}
         </div>
     )
 }
