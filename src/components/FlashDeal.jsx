@@ -4,7 +4,7 @@ import FlashDeals from '~/data/flashDeal'
 function FlashDeal() {
     return (
         <div id="flash-deals" className='bg-white max-w-full py-12'>
-            <div className='container max-w-7xl mx-auto flex items-center justify-between gap-x-4'>
+            <div className='container max-w-7xl mx-auto flex items-center justify-between gap-x-4 px-[70px]'>
                 {
                     FlashDeals.map(dealCard => (
 

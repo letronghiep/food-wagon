@@ -37,7 +37,7 @@ section {
 }
 .is-active {
   color: #f97316;
-  background-color: #fff;
+  background-color: #fde9de;
 }
 .text-truncate {
   display:-webkit-box;
@@ -46,4 +46,17 @@ section {
   overflow: hidden;
   text-overflow: ellipsis;
   word-break: break-word;
+}
+.tippy-box {
+  background-color: white;
+  color: red;
+  border: 1px solid;
+}
+
+.svg-content {
+  fill: white;
+}
+
+.svg-arrow {
+  fill: red;
 }

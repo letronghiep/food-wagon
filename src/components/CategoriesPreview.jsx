@@ -6,7 +6,7 @@ import CategoryPreview from './CategoryPreview';
 function CategoriesPreview() {
     const categories = useSelector(selectCategoriesMap)
     return (
-        <div className='max-w-7xl mx-auto container my-[72px]'>
+        <div className='max-w-7xl mx-auto container my-[72px] px-[70px]'>
             {Object.keys(categories).map(title => {
                 const products = categories[title];
                 return <CategoryPreview key={title} products={products} title={title} />

@@ -16,7 +16,7 @@ function Banner() {
             backgroundSize: 'cover',
             backgroundPosition: 'top center',
         }}>
-            <div className='container max-w-7xl mx-auto relative'>
+            <div className='container max-w-7xl mx-auto relative px-[70px]'>
                 <div className='bg-white mt-16 py-14 px-16 grid grid-cols-3 gap-x-3 rounded-3xl shadow-lg shadow-amber-200'>
                     {
                         banner.map((item, index) => (

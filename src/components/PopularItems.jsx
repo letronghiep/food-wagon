@@ -8,7 +8,7 @@ import Carousel from 'better-react-carousel'
 function PopularItems() {
     return (
         <div id="popular-items" className='bg-gray-100 py-12'>
-            <div className='container mx-auto max-w-7xl'>
+            <div className='container mx-auto max-w-7xl px-[70px]'>
                 <h1 className='font-bold text-center text-5xl text-gray-700 mt-16 mb-12'>Popular items</h1>
                 {/* <div className='flex items-center justify-between'> */}
 

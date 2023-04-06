@@ -13,7 +13,7 @@ function CategoriesPage() {
     }, [category, categories])
     return (
         <section id="food-pages" className='mt-[72px]'>
-            <div className='container max-w-7xl mx-auto'>
+            <div className='container max-w-7xl mx-auto px-[70px]'>
                 <h1 className='font-bold text-4xl text-center'>{category.toLocaleUpperCase()}</h1>
                 <div className='grid grid-cols-4 gap-x-4'>
                     {
