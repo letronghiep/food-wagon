@@ -16,8 +16,4 @@ export const categoriesSlice = createSlice({
 })
 
 export const { setCategories } = categoriesSlice.actions;
-<<<<<<< HEAD
 export const  categoriesReducer  = categoriesSlice.reducer;
-=======
-export const categoriesReducer = categoriesSlice.reducer;
->>>>>>> day4

@@ -18,9 +18,13 @@ input {
   outline: none;
 }
 
+section {
+  padding: 50px 0;
+}
 .login-btn {
   color:  0px 5px 10px rgba(255, 174, 0, 0.26), 0px 20px 40px rgba(255, 174, 0, 0.29);
 }
+
 /* Header */
 .header-group {
   background-image: url('./assets/image/group_1.png');

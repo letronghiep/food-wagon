@@ -1,9 +1,9 @@
 import React, { Fragment } from 'react'
 import { Link, Outlet, useNavigate } from 'react-router-dom'
 import images from '~/assets/image'
-import SearchInput from '../../components/SearchInput'
-import Button from '../../components/Button'
-import CartIcon from '../../components/CartIcon'
+import SearchInput from '../components/SearchInput'
+import Button from '../components/Button'
+import CartIcon from '../components/CartIcon'
 function Navigation() {
   const { logo, brand, location, searchIcon, userLogin } = images
   const navigate = useNavigate()
