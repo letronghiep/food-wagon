@@ -7,6 +7,7 @@ module.exports = {
     extend: {
       backgroundImage: {
         'login-btn': "linear-gradient(to bottom, rgba(255, 174, 0, 0.29), rgba(255, 174, 0, 0.26))",
+        
       },
     }
 
