@@ -1,4 +1,11 @@
 import React from 'react'
+<<<<<<< HEAD
+
+function CardItem({ product }) {
+  return (
+    <div >
+
+=======
 import Button from './Button'
 function CardItem({ product }) {
   const { name, price, discount, imageUrl } = product;
@@ -17,6 +24,7 @@ function CardItem({ product }) {
         </span>
       </p>}
       <Button children="Order now" className="mt-auto font-semibold bg-orange-600 hover:bg-orange-500 text-white uppercase p-3 rounded-2xl" />
+>>>>>>> day4
     </div>
   )
 }

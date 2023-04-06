@@ -1,5 +1,15 @@
 import React from 'react'
 import CardItem from './CardItem'
+<<<<<<< HEAD
+
+function CategoryPreview({ products, title }) {
+    return (
+        <div>
+            <h1>{title}</h1>
+            {products.filter((_, index) => index <= 4).map((product, index) => (
+                <CardItem key={index} product={product} />
+            ))}
+=======
 import { Link } from 'react-router-dom'
 
 function CategoryPreview({ title, products }) {
@@ -11,6 +21,7 @@ function CategoryPreview({ title, products }) {
                     <CardItem key={idx} product={product} />
                 ))}
             </div>
+>>>>>>> day4
         </div>
     )
 }
