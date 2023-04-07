@@ -9,7 +9,7 @@ function Cta() {
         navigate('/booking')
     }
     return (
-        <div id='cta' className='my-20 py-12'  style={{
+        <div id='cta' className='mt-20 py-12' style={{
             backgroundImage: 'url(https://i.ibb.co/0YgxB8K/Image-1.png)',
             backgroundPosition: "center",
             backgroundRepeat: "no-repeat",

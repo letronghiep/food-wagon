@@ -83,7 +83,7 @@ function Footer() {
                             <h2 className='uppercase font-bold text-white text-2xl'>Receive exclusive offers and
                                 discounts in your mailbox</h2>
                             <form className='flex items-center justify-between mt-5' onSubmit={submitEmail}>
-                                <SearchInput className="w-[60%]" Icon={MailOutline} placeholder="Enter email" />
+                                <SearchInput className="w-[60%] text-black focus:outline-none" bgInput="bg-slate-200 focus:outline-slate-200" Icon={MailOutline} placeholder="Enter email" />
                                 <Button type="Submit" className="text-white bg-[#ffb30e] py-2 rounded-lg px-4 flex items-center justify-center font-bold">Subscribe</Button>
                             </form>
                         </div>

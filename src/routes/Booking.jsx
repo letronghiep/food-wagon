@@ -17,10 +17,13 @@ function Booking() {
   })
 
   return (
-    <Routes>
-      <Route index element={<CategoriesPreview />} />
-      <Route path='/:category' element={<CategoriesPage />} />
-    </Routes>
+    <div className="mt-[72px]">
+      <Routes>
+        <Route index element={<CategoriesPreview />} />
+        <Route path='/:category' element={<CategoriesPage />} />
+      </Routes>
+
+    </div>
   )
 }
 

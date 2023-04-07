@@ -28,13 +28,15 @@ function Navigation() {
             <span className='font-bold'>HaNoi, VietNam</span>
           </div>
           <div className='flex items-center justify-between'>
-            <SearchInput src={searchIcon} placeholder="Search Food" />
+            <SearchInput src={searchIcon} placeholder="Search Food" bgInput='focus:outline-orange-400' />
             <Link to="booking" children="Booking" className="flex items-center text-amber-500 px-3 py-2 rounded-lg font-bold shadow-md shadow-orange-300 hover:bg-orange-200 hover:text-white ml-4 " />
             <Button onClick={goToLogin} images={userLogin} children="Login" className="flex items-center text-amber-500 px-3 py-2 rounded-lg font-bold shadow-md shadow-orange-300 hover:bg-orange-200 hover:text-white ml-4 " />
             <Tippy
               arrow
+              visible
               interactive
-              offset={[-280, -30]}
+              offset={[-250, -2
+              0]}
               placement='bottom-start'
               delay={[100, 700]}
               render={attrs => (
