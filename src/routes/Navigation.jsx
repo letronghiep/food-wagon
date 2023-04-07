@@ -35,8 +35,7 @@ function Navigation() {
               arrow
               visible
               interactive
-              offset={[-250, -2
-              0]}
+              offset={[-250, -20]}
               placement='bottom-start'
               delay={[100, 700]}
               render={attrs => (
