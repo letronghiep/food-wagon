@@ -25,7 +25,7 @@ function Banner() {
                     }
                 </div>
                 <div className='flex items-center mt-20 px-11'>
-                    <div className='mb-[-50px]'>
+                    <div className='mb-[-48px]'>
                         <img src='https://i.ibb.co/tcb5fXr/Image.png' height='' width='500px' alt='Iphone' />
 
                     </div>

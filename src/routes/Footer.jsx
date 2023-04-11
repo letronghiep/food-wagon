@@ -34,7 +34,7 @@ const renderItems = (props, title) => {
         <h2 className='text-white uppercase text-2xl font-bold'>{title}</h2>
         <ul className='text-white mt-5 list-none'>
             {props.map((item) => (
-                <li className='mb-2 font-medium'>{item}</li>
+                <li className='mb-2 font-medium cursor-pointer'>{item}</li>
             ))}
         </ul>
     </div>
@@ -55,7 +55,7 @@ function Footer() {
                         <div className='grid grid-cols-5 mt-6'>
                             {
                                 cities.map(item => (
-                                    <p className='text-base text-white mb-2'>{item}</p>
+                                    <p className='text-base text-white mb-2 cursor-pointer'>{item}</p>
                                 ))
                             }
                         </div>

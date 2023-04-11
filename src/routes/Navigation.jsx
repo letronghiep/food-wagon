@@ -11,7 +11,7 @@ function Navigation() {
   const { logo, brand, location, searchIcon, userLogin } = images
   const navigate = useNavigate()
   const goToLogin = () => {
-    navigate('/login')
+    navigate('/auth')
   }
   return (
     <Fragment>
@@ -29,11 +29,10 @@ function Navigation() {
           </div>
           <div className='flex items-center justify-between'>
             <SearchInput src={searchIcon} placeholder="Search Food" bgInput='focus:outline-orange-400' />
-            <Link to="booking" children="Booking" className="flex items-center text-amber-500 px-3 py-2 rounded-lg font-bold shadow-md shadow-orange-300 hover:bg-orange-200 hover:text-white ml-4 " />
-            <Button onClick={goToLogin} images={userLogin} children="Login" className="flex items-center text-amber-500 px-3 py-2 rounded-lg font-bold shadow-md shadow-orange-300 hover:bg-orange-200 hover:text-white ml-4 " />
+            <Link to="booking" children="Booking" className="flex items-center text-amber-500 px-3 py-2 rounded-lg font-bold shadow-md shadow-orange-300 hover:bg-orange-300 hover:text-white ml-4 " />
+            <Button onClick={goToLogin} images={userLogin} children="Login" className="flex items-center text-amber-500 px-3 py-2 rounded-lg font-bold shadow-md shadow-orange-300 hover:bg-orange-300 hover:text-white ml-4 " />
             <Tippy
               arrow
-              visible
               interactive
               offset={[-250, -20]}
               placement='bottom-start'

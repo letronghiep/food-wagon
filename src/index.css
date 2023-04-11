@@ -60,3 +60,12 @@ section {
 .svg-arrow {
   fill: red;
 }
+
+input:focus ~ .input-text,
+input:not(:placeholder-shown) ~ .input-text{
+  @apply transform -translate-y-[41px] -translate-x-1 scale-95;
+}
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
