@@ -5,6 +5,7 @@ import Booking from './routes/Booking';
 import Checkout from './routes/Checkout';
 import MainLayout from './routes/MainLayout';
 import Auth from './routes/Auth';
+import Discount from './routes/Discount';
 function App() {
   return (
     <Routes>
@@ -13,6 +14,8 @@ function App() {
         <Route path='/auth/*' element={<Auth />} />
         <Route path='/booking/*' element={<Booking />} />
         <Route path='/checkout' element={<Checkout />} />
+        <Route path='/discount/*' element={<Discount />} />
+
       </Route>
 
     </Routes>

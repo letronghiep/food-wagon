@@ -15,3 +15,19 @@ export const selectCategoriesMap = createSelector(
         return acc;
     }, {})
 )
+
+export const selectCategoryWithDiscount = createSelector(
+    [selectCategories],
+    (categories) => categories.reduce((result, category) => {
+        category.items.forEach(product => {
+            const discount = product.discount || 0;
+            if (!result[discount]) {
+                result[discount] = { products: [] }
+            }
+            result[discount].products.push(product);
+        })
+        return result;
+    }, {})
+
+
+)

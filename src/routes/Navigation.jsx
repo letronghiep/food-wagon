@@ -36,7 +36,7 @@ function Navigation() {
               interactive
               offset={[-250, -20]}
               placement='bottom-start'
-              delay={[100, 700]}
+              delay={[100, 500]}
               render={attrs => (
                 <div tabIndex="-1" {...attrs}>
                   <CartDropDown />

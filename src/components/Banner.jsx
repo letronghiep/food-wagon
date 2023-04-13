@@ -20,7 +20,7 @@ function Banner() {
                 <div className='bg-white mt-16 py-14 px-16 grid grid-cols-3 gap-x-3 rounded-3xl shadow-lg shadow-amber-200'>
                     {
                         banner.map((item, index) => (
-                            <DealCard id={index} dealCard={item} className="grid grid-cols-2 px-8 text-4xl justify-around border-r-2 last:border-none text-orange-500 cursor-pointer" width="100px" />
+                            <DealCard id={index} dealCard={item} className="grid grid-cols-2 pr-6 text-4xl justify-around border-r-2 last:border-none text-orange-500 cursor-pointer" width="100px" />
                         ))
                     }
                 </div>

@@ -7,6 +7,7 @@ import CardItem from '../components/CardItem';
 function CategoriesPage() {
     const { category } = useParams();
     const categories = useSelector(selectCategoriesMap);
+
     const [foods, setFoods] = useState(categories[category])
     useEffect(() => {
         setFoods(categories[category])

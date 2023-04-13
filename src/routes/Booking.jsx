@@ -15,7 +15,6 @@ function Booking() {
   useEffect(() => {
     dispatch(setCategories(foods));
   })
-
   return (
     <div className="mt-[72px]">
       <Routes>

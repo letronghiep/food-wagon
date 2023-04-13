@@ -1,10 +1,22 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
 import { rootReducer } from './rootReducer';
+import { loadFromLocalStorage, saveToLocalStorage } from '../middleware/localStorage';
 import logger from 'redux-logger';
-const middleWares = [process.env.NODE_ENV === 'production' && logger].filter(Boolean)
+import { localStorageMiddleware } from '../middleware/localStorageMiddleware';
+
+// const middleWares = [process.env.NODE_ENV === 'production' && logger].filter(Boolean)
+
+const persistedState = loadFromLocalStorage();
 
 
-export const store = configureStore({
+const store = configureStore({
   reducer: rootReducer,
-  middleware: middleWares,
+  preloadedState: persistedState,
+  middleware: getDefaultMiddleware => getDefaultMiddleware().concat(localStorageMiddleware)
 });
+
+store.subscribe(() => {
+  saveToLocalStorage(store.getState())
+})
+
+export default store;

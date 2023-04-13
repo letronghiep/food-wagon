@@ -1,7 +1,12 @@
 import React from 'react'
+import { addItemToCart } from '../store/cart/cartSlice'
+import { useDispatch } from 'react-redux';
 import Button from './Button'
 function CardItem({ product }) {
+  // const cartItems = useSelector(selectCartItems)
   const { name, price, discount, imageUrl } = product;
+  const dispatch = useDispatch();
+  const addFoodToCart = () => dispatch(addItemToCart(product))
   return (
     <div className='relative flex flex-col justify-between  cursor-pointer bg-gray-200 mt-6 rounded-t-2xl rounded-b-lg overflow-hidden'>
       <img src={imageUrl} alt={name} className='rounded-2xl w-full object-cover h-[208px]' />
@@ -17,7 +22,7 @@ function CardItem({ product }) {
             <span>Off</span>
           </span>
         </p>}
-        <Button children="Order now" className="w-full font-semibold bg-orange-600 hover:bg-orange-500 text-white uppercase p-3 rounded-lg" />
+        <Button onClick={addFoodToCart} children="Order now" className="w-full font-semibold bg-orange-600 hover:bg-orange-500 text-white uppercase p-3 rounded-lg" />
 
       </div>
     </div>
