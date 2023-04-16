@@ -21,20 +21,14 @@ const options = [
     {
         title: "Legal",
         prop: ["Terms & Conditions", "Refund & Cancellation", "Privacy Policy", "Cookie Policy"]
-    },
-
-    {
-        title: "Legal",
-        prop: ["Terms & Conditions", "Refund & Cancellation", "Privacy Policy", "Cookie Policy"]
-
     }
 ]
 const renderItems = (props, title) => {
-    return <div>
+    return <div key={title}>
         <h2 className='text-white uppercase text-2xl font-bold'>{title}</h2>
         <ul className='text-white mt-5 list-none'>
-            {props.map((item) => (
-                <li className='mb-2 font-medium cursor-pointer'>{item}</li>
+            {props.map((item, idx) => (
+                <li key={idx} className='mb-2 font-medium cursor-pointer'>{item}</li>
             ))}
         </ul>
     </div>
@@ -54,8 +48,8 @@ function Footer() {
                         <h1 className='text-white font-bold text-2xl uppercase'>Out top cities</h1>
                         <div className='grid grid-cols-5 mt-6'>
                             {
-                                cities.map(item => (
-                                    <p className='text-base text-white mb-2 cursor-pointer'>{item}</p>
+                                cities.map((item, idx) => (
+                                    <p key={idx} className='text-base text-white mb-2 cursor-pointer'>{item}</p>
                                 ))
                             }
                         </div>
@@ -63,7 +57,7 @@ function Footer() {
                     <div className='pt-5 grid grid-cols-4'>
                         {
                             Object.keys(options).map((title) => {
-                                const props = options[title]
+                                const props = options[title];
                                 return renderItems(props.prop, props.title)
                             })
                         }

@@ -13,7 +13,7 @@ function FlashDeal() {
                 {
                     FlashDeals.map(dealCard => (
 
-                        <DealCard onClick={() => handlerNavigate(dealCard)} key={dealCard.id} dealCard={dealCard} className='relative rounded-xl overflow-hidden flex flex-col justify-between cursor-pointer hover:-translate-y-4 transition-transform text-xl text-slate-600 bg-white shadow-md pb-5' />
+                        <DealCard width="304px" height='230px' onClick={() => handlerNavigate(dealCard)} key={dealCard.id} dealCard={dealCard} className='h-[333px] relative rounded-xl overflow-hidden flex flex-col justify-between cursor-pointer hover:-translate-y-4 transition-transform text-xl text-slate-600 bg-white shadow-md pb-5' />
                     ))
                 }
 

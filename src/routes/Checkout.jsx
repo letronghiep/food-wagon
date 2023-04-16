@@ -1,36 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import CheckoutItem from '../components/CheckoutItem'
 import { selectCartItems, selectCartTotal } from '../store/cart/cartSelector'
-import { useDispatch, useSelector } from 'react-redux'
-import { loadFromLocalStorage } from '../middleware/localStorage';
-import { addItemToCart } from '../store/cart/cartSlice';
+import { useSelector } from 'react-redux'
 
 function Checkout() {
-    const dispatch = useDispatch()
     const cartItems = useSelector(selectCartItems)
     const total = useSelector(selectCartTotal)
-
-    const [localStorageCartItems, setLocalStorageCartItems] = useState([]);
-
-    useEffect(() => {
-        const cartFromLocalStorage = loadFromLocalStorage();
-        if (cartFromLocalStorage) {
-            setLocalStorageCartItems(cartFromLocalStorage.cartItems);
-        }
-    }, []);
-    // useEffect(() => {
-
-
-    useEffect(() => {
-        localStorageCartItems.forEach(item => {
-            const cartItem = cartItems.find(i => i.id === item.id);
-            if (!cartItem) {
-                dispatch(addItemToCart(item));
-            }
-        });
-    }, [dispatch, cartItems, localStorageCartItems]);
-
-
 
 
 
@@ -56,12 +31,12 @@ function Checkout() {
                 </div>
                 {
                     cartItems.length > 0 ? cartItems.map(cartItem => (
-                        <CheckoutItem cartItem={cartItem} />
+                        <CheckoutItem key={cartItem.id} cartItem={cartItem} />
 
-                    )) : <span className='mx-auto mt-52 text-3xl uppercase'>Checkout is empty</span>
+                    )) : <span  className='mx-auto mt-52 text-3xl uppercase'>Checkout is empty</span>
                 }
 
-                <span className='ml-auto text-3xl mt-12'>Total: {total}</span>
+                <span className='ml-auto text-3xl mt-12'>Total: {total}đ</span>
             </div>
         </div>
     )

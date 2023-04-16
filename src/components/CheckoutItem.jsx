@@ -2,31 +2,20 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Add, Clear, Remove } from '@mui/icons-material'
 import { addItemToCart, clearItemFromCart, removeItemFromCart } from '../store/cart/cartSlice';
-import { loadFromLocalStorage, saveToLocalStorage } from '../middleware/localStorage';
 import { selectCartItems } from '../store/cart/cartSelector';
 import store from '../store/store';
 
 function CheckoutItem({ cartItem }) {
     const dispatch = useDispatch();
-    const cartItems = useSelector(selectCartItems)
-    const { id, name, price, discount, imageUrl, quantity } = cartItem;
+    const { name, price, discount, imageUrl, quantity } = cartItem;
 
     const handlerAddItem = () => {
-        const updatedCartItem = { ...cartItem, quantity: cartItem.quantity + 1 };
-        dispatch(addItemToCart(updatedCartItem));
-        const updatedCartItems = cartItems.map((item) =>
-            item.id === id ? updatedCartItem : item
-        );
-        saveToLocalStorage(updatedCartItems);
+        dispatch(addItemToCart(cartItem))
     };
-    // const handlerAddItem = () => {
-    //     const updatedCartItem = { ...cartItem, quantity: cartItem.quantity + 1 };
-    //     dispatch(addItemToCart(updatedCartItem));
-    // };
     const handlerRemoveItem = () => {
         if (quantity > 1) {
-            const updatedCartItem = { ...cartItem, quantity: cartItem.quantity - 1 };
-            dispatch(removeItemFromCart(updatedCartItem));
+
+            dispatch(removeItemFromCart(cartItem));
         }
     };
 
@@ -34,9 +23,6 @@ function CheckoutItem({ cartItem }) {
         dispatch(clearItemFromCart(cartItem));
     };
 
-    // useEffect(() => {
-    //     saveToLocalStorage(cartItems);
-    // }, [cartItems]);
     return (
         <div className='flex items-center p-3 w-full min-h-[100px] border-b'>
             <div className='flex items-center w-[23%]'>

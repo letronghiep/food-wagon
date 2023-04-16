@@ -11,7 +11,7 @@ function CartDropDown() {
     <div className='absolute top-10 bg-white shadow-md shadow-slate-300 w-[280px] border border-slate-300'>
       <div className='max-h-[300px] overflow-y-auto -scroll-ml-2.5'>
         {cartItems.length ? (cartItems.map(cartItem => (
-          <DropDownItem cartItem={cartItem} />
+          <DropDownItem key={cartItem.id} cartItem={cartItem} />
         ))) : (<span className='text-3xl justify-center flex items-center py-20 mt-10'>Your cart is empty</span>)
         }
 

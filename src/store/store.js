@@ -1,22 +1,25 @@
-import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
+import { configureStore } from '@reduxjs/toolkit';
 import { rootReducer } from './rootReducer';
-import { loadFromLocalStorage, saveToLocalStorage } from '../middleware/localStorage';
+import { persistStore, persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
 import logger from 'redux-logger';
-import { localStorageMiddleware } from '../middleware/localStorageMiddleware';
 
-// const middleWares = [process.env.NODE_ENV === 'production' && logger].filter(Boolean)
+const middleWares = [process.env.NODE_ENV !== 'production' && logger].filter(Boolean)
 
-const persistedState = loadFromLocalStorage();
 
+const persistConfig = {
+  key: 'root',
+  storage,
+  whitelist: ['cart']
+}
+
+const persistedReducer = persistReducer(persistConfig, rootReducer)
 
 const store = configureStore({
-  reducer: rootReducer,
-  preloadedState: persistedState,
-  middleware: getDefaultMiddleware => getDefaultMiddleware().concat(localStorageMiddleware)
+  reducer: persistedReducer,
+  middleware: middleWares,
+  // middleware: getDefaultMiddleware => getDefaultMiddleware()
 });
 
-store.subscribe(() => {
-  saveToLocalStorage(store.getState())
-})
-
 export default store;
+export const persistor = persistStore(store)

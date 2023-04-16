@@ -1,23 +1,24 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import FormInput from '../components/FormInput'
+import { signInAuthWithEmailAndPassword } from '../utils/firebase/firebase'
 
 function LoginForm() {
   const defaultFormField = {
-    username: '',
+    email: '',
     password: ''
   }
 
   const navigate = useNavigate()
   const [formField, setFormField] = useState(defaultFormField);
   const [formErrors, setFormErrors] = useState(defaultFormField);
-  const { username, password } = formField;
-  const handleSubmitForm = (e) => {
+  const { email, password } = formField;
+  const handleSubmitForm = async (e) => {
     e.preventDefault();
-    if (!username) {
-      setFormErrors(prevState => ({ ...prevState, username: "Please enter a username" }));
+    if (!email) {
+      setFormErrors(prevState => ({ ...prevState, email: "Please enter a email" }));
     } else {
-      setFormErrors(prevState => ({ ...prevState, username: '' }));
+      setFormErrors(prevState => ({ ...prevState, email: '' }));
     }
 
     if (!password) {
@@ -26,12 +27,27 @@ function LoginForm() {
       setFormErrors(prevState => ({ ...prevState, password: '' }));
     }
 
-    if (!username && !password) {
-      setFormErrors({ username: "Please enter a username", password: "Please enter a password" });
+    if (!email && !password) {
+      setFormErrors({ email: "Please enter a email", password: "Please enter a password" });
     }
 
-    if (username && password) {
-      navigate('/')
+    if (email && password) {
+      try {
+        await signInAuthWithEmailAndPassword(email, password);
+        navigate('/')
+      } catch (error) {
+        switch (error.code) {
+          case 'auth/user-not-found':
+            alert("Email or password not found")
+            break;
+          case 'auth/wrong-password':
+            alert("Password is incorrect")
+            break;
+          default:
+            break;
+        }
+        console.log(error);
+      }
     }
     console.log(formErrors)
 
@@ -39,12 +55,11 @@ function LoginForm() {
 
   const handleOnChange = (event) => {
     const { name, value } = event.target;
-    if (username.startsWith(' ') || password.startsWith(' ')) return
+    if (email.startsWith(' ') || password.startsWith(' ')) return
     let errors = { ...formErrors };
     switch (name) {
-      case 'username':
-        errors.username = /^[0-9]/.test(username) ? "First Character username must be a letter" : "";
-
+      case 'email':
+        errors.email = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value) ? "" : "The email is not valid"
         break;
       case 'password':
         errors.password = value.length < 6 ? 'Password must be at least 6 characters long!' : "";
@@ -60,11 +75,6 @@ function LoginForm() {
     Object.values(formErrors).forEach((val) => val.length > 0 && (valid = false));
     return valid;
   };
-  // const validateFormField = () => {
-  //   let valid = false;
-  //   Object.keys(formField).map((key) => formField[key].length > 0 ? (valid = true) : valid = false);
-  //   return valid;
-  // }
   return (
     <div className="bg-slate-50 rounded-2xl px-12 py-12 shadow-md">
       <h2 className="text-center uppercase my-5 text-3xl font-bold text-orange-600">
@@ -72,8 +82,8 @@ function LoginForm() {
       </h2>
       <form className="" onSubmit={handleSubmitForm}>
         <div className="flex flex-col  w-[400px]">
-          <FormInput type='text' placeholder="username" label="username" name="username" value={username} onChange={handleOnChange} />
-          {formErrors.username && <span className="text-red-600">{formErrors.username}</span>}
+          <FormInput type='email' placeholder="email" label="email" name="email" value={email} onChange={handleOnChange} />
+          {formErrors.email && <span className="text-red-600">{formErrors.email}</span>}
           <FormInput type='password' placeholder="password" label="password" name='password' value={password} onChange={handleOnChange} />
           {formErrors.password && <span className="text-red-600">{formErrors.password}</span>}
 

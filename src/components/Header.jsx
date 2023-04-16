@@ -49,7 +49,7 @@ function Header() {
                             </div>
                             <div className='flex items-center justify-between pt-4 border-t'>
                                 <SearchInput src={location} className="border outline-4 w-[360px] rounded-md" placeholder="Enter your Address" />
-                                <Button className="flex items-center text-white font-bold text-base bg-orange-500 py-2 px-6 w-[142px] rounded-md hover:bg-orange-600" children="Find Food" />
+                                <Button className="flex items-center text-white font-bold text-base bg-orange-500 py-2 px-6 w-[142px] rounded-md hover:bg-orange-600 justify-center" children="Find Food" />
                             </div>
                         </div>
                     </div>

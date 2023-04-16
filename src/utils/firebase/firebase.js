@@ -1,9 +1,8 @@
-// Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
 
-// Your web app's Firebase configuration
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { doc, getDoc, getFirestore, setDoc } from 'firebase/firestore'
+
 const firebaseConfig = {
     apiKey: "AIzaSyAPZMqlAfZWHiDWwZPpw8yVgxGaMyz0TaU",
     authDomain: "food-wagon-fb097.firebaseapp.com",
@@ -15,4 +14,35 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const firebaseApp = initializeApp(firebaseConfig);
+const db = getFirestore()
+export const auth = getAuth()
 
+export const createAuthWithEmailAndPassword = async (email, password) => {
+    if (!email || !password) return;
+    return await createUserWithEmailAndPassword(auth, email, password);
+}
+
+export const createUserDocumentFromAuth = async (userAuth, additionalInformation = {}) => {
+    if (!userAuth) return;
+    const userDocRef = doc(db, 'users', userAuth.uid)
+    const userSnapshot = await getDoc(userDocRef);
+    if (!userSnapshot.exists()) {
+        const { displayName, email } = userAuth;
+        const createAt = new Date();
+        try {
+            setDoc(userDocRef, {
+                displayName,
+                email,
+                createAt,
+                ...additionalInformation
+            })
+        } catch (error) {
+            console.log(error)
+        }
+    }
+}
+
+export const signInAuthWithEmailAndPassword = async (email, password) => {
+    if (!email || !password) return;
+    return await signInWithEmailAndPassword(auth, email, password)
+}

@@ -1,10 +1,13 @@
 import React, { useState } from 'react'
 import FormInput from '../components/FormInput'
 import { Link, useNavigate } from 'react-router-dom'
+import { createUserWithEmailAndPassword } from 'firebase/auth'
+import { createAuthUser, createAuthWithEmailAndPassword } from '../utils/firebase/firebase'
 
 function RegisterForm() {
     const defaultFormField = {
         username: '',
+        email: '',
         password: '',
         confirmPassword: ''
     }
@@ -12,13 +15,18 @@ function RegisterForm() {
     const navigate = useNavigate()
     const [formField, setFormField] = useState(defaultFormField);
     const [formErrors, setFormErrors] = useState(defaultFormField);
-    const { username, password, confirmPassword } = formField;
-    const handleSubmitForm = (e) => {
+    const { username, email, password, confirmPassword } = formField;
+    const handleSubmitForm = async (e) => {
         e.preventDefault();
         if (!username) {
-            setFormErrors(prevState => ({ ...prevState, username: "Please enter a username" }));
+            setFormErrors(prevState => ({ ...prevState, username: "Please enter a username" }))
         } else {
-            setFormErrors(prevState => ({ ...prevState, username: '' }));
+            setFormErrors(prevState => ({ ...prevState, username: "" }))
+        }
+        if (!email) {
+            setFormErrors(prevState => ({ ...prevState, email: "Please enter a email" }));
+        } else {
+            setFormErrors(prevState => ({ ...prevState, email: '' }));
         }
 
         if (!password) {
@@ -32,12 +40,17 @@ function RegisterForm() {
         } else {
             setFormErrors(prevState => ({ ...prevState, confirmPassword: '' }));
         }
-        if (!username && !password && !confirmPassword) {
-            setFormErrors({ username: "Please enter a username", password: "Please enter a password", confirmPassword: "Please enter your confirm password" });
+        if (!username && !email && !password && !confirmPassword) {
+            setFormErrors({ username: "Please enter a username", email: "Please enter a email", password: "Please enter a password", confirmPassword: "Please enter your confirm password" });
         }
 
-        if (username && password && confirmPassword) {
-            navigate('/')
+        if (username && email && password && confirmPassword) {
+            try {
+                await createAuthWithEmailAndPassword(email, password)
+                navigate('/')
+            } catch (error) {
+                console.log(error)
+            }
         }
 
     }
@@ -47,8 +60,10 @@ function RegisterForm() {
         let errors = { ...formErrors }
         switch (name) {
             case 'username':
-                errors.username = value.length === 0 ? 'Please enter your username' : "";
-                errors.username = /^[0-9]/.test(value) ? "First Character username must be a letter" : ""
+                errors.username = /^\d/.test(value) ? "Username is invalid" : ""
+                break;
+            case 'email':
+                errors.email = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value) ? "" : "The email is not valid"
                 break;
             case 'password':
                 errors.password = value.length < 6 ? 'Password must be at least 8 characters long!' : "";
@@ -77,6 +92,8 @@ function RegisterForm() {
                 <div className="flex flex-col w-[400px]">
                     <FormInput type='text' placeholder="username" label="username" name="username" value={username} onChange={handleOnChange} />
                     {formErrors.username && <span className="text-red-600">{formErrors.username}</span>}
+                    <FormInput type='text' placeholder="email" label="email" name="email" value={email} onChange={handleOnChange} />
+                    {formErrors.email && <span className="text-red-600">{formErrors.email}</span>}
 
                     <FormInput type='password' placeholder="password" label="password" name="password" value={password} onChange={handleOnChange} />
                     {formErrors.password && <span className="text-red-600">{formErrors.password}</span>}
