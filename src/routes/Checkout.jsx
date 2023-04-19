@@ -1,12 +1,17 @@
-import React, { useEffect, useState } from 'react'
+import { useDispatch } from 'react-redux'
 import CheckoutItem from '../components/CheckoutItem'
 import { selectCartItems, selectCartTotal } from '../store/cart/cartSelector'
 import { useSelector } from 'react-redux'
+import { clearCartItems } from '../store/cart/cartSlice'
 
 function Checkout() {
+
+    const dispatch = useDispatch()
     const cartItems = useSelector(selectCartItems)
     const total = useSelector(selectCartTotal)
-
+    const handlePaypal = () => {
+        dispatch(clearCartItems())
+    }
 
 
     return (
@@ -31,12 +36,13 @@ function Checkout() {
                 </div>
                 {
                     cartItems.length > 0 ? cartItems.map(cartItem => (
-                        <CheckoutItem key={cartItem.id} cartItem={cartItem} />
+                        <CheckoutItem className='flex items-center p-3 w-full min-h-[100px] border-b' key={cartItem.id} cartItem={cartItem} />
 
-                    )) : <span  className='mx-auto mt-52 text-3xl uppercase'>Checkout is empty</span>
+                    )) : <span className='mx-auto mt-52 text-3xl uppercase'>Checkout is empty</span>
                 }
 
                 <span className='ml-auto text-3xl mt-12'>Total: {total}đ</span>
+                <button onClick={handlePaypal} className='p-2 my-6 w-[120px] flex items-center justify-center bg-orange-500 text-white uppercase ml-auto rounded-md hover:bg-orange-600'>Thanh Toan</button>
             </div>
         </div>
     )

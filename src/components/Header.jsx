@@ -44,7 +44,7 @@ function Header() {
                                 {dataTabs.map(item => (
                                     <Button onClick={() => {
                                         navigate(item.id, item.tabTitle)
-                                    }} LeftIcon={item.icon} key={item.id} className={`flex items-center text-slate-700 font-bold rounded-md px-3 py-2.5 mr-3 ${active === item.id ? "is-active" : ""}`} children={item.tabTitle} />
+                                    }} LeftIcon={<item.icon />} key={item.id} className={`flex items-center text-slate-700 font-bold rounded-md px-3 py-2.5 mr-3 ${active === item.id ? "is-active" : ""}`} children={item.tabTitle} />
                                 ))}
                             </div>
                             <div className='flex items-center justify-between pt-4 border-t'>

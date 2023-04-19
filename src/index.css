@@ -39,6 +39,11 @@ section {
   color: #f97316;
   background-color: #fde9de;
 }
+.ordered {
+  background-color: #f57328;
+  color: white;
+  transition: all linear 0.2s;
+}
 .text-truncate {
   display:-webkit-box;
   -webkit-line-clamp:2;

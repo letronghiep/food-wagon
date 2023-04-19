@@ -45,14 +45,11 @@ const cartSlice = createSlice({
         clearItemFromCart(state, action) {
             state.cartItems = clearFromCart(state.cartItems, action.payload);
         },
-        updateItemQuantity(state, action) {
-            state.cartItems = state.cartItems.map(cartItem => cartItem.id === action.payload.id
-                ? { ...cartItem, quantity: cartItem.quantity + action.payload.quantity }
-                : cartItem
-            );
+        clearCartItems(state, action) {
+            state.cartItems = [];
         }
     }
 });
 
-export const { addItemToCart, removeItemFromCart, clearItemFromCart, updateItemQuantity } = cartSlice.actions;
+export const { addItemToCart, removeItemFromCart, clearItemFromCart, clearCartItems } = cartSlice.actions;
 export const cartReducer = cartSlice.reducer;

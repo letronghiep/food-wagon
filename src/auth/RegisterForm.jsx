@@ -1,12 +1,14 @@
 import React, { useState } from 'react'
 import FormInput from '../components/FormInput'
 import { Link, useNavigate } from 'react-router-dom'
-import { createUserWithEmailAndPassword } from 'firebase/auth'
-import { createAuthUser, createAuthWithEmailAndPassword } from '../utils/firebase/firebase'
+import { auth, createAuthWithEmailAndPassword, createUserDocumentFromAuth } from '../utils/firebase/firebase'
+import { login, setCurrentUser } from '../store/user/userSlice'
+import { useDispatch } from 'react-redux'
 
 function RegisterForm() {
+    const dispatch = useDispatch()
     const defaultFormField = {
-        username: '',
+        displayName: '',
         email: '',
         password: '',
         confirmPassword: ''
@@ -15,13 +17,13 @@ function RegisterForm() {
     const navigate = useNavigate()
     const [formField, setFormField] = useState(defaultFormField);
     const [formErrors, setFormErrors] = useState(defaultFormField);
-    const { username, email, password, confirmPassword } = formField;
+    const { displayName, email, password, confirmPassword } = formField;
     const handleSubmitForm = async (e) => {
         e.preventDefault();
-        if (!username) {
-            setFormErrors(prevState => ({ ...prevState, username: "Please enter a username" }))
+        if (!displayName) {
+            setFormErrors(prevState => ({ ...prevState, displayName: "Please enter a user name" }))
         } else {
-            setFormErrors(prevState => ({ ...prevState, username: "" }))
+            setFormErrors(prevState => ({ ...prevState, displayName: "" }))
         }
         if (!email) {
             setFormErrors(prevState => ({ ...prevState, email: "Please enter a email" }));
@@ -40,27 +42,25 @@ function RegisterForm() {
         } else {
             setFormErrors(prevState => ({ ...prevState, confirmPassword: '' }));
         }
-        if (!username && !email && !password && !confirmPassword) {
-            setFormErrors({ username: "Please enter a username", email: "Please enter a email", password: "Please enter a password", confirmPassword: "Please enter your confirm password" });
+        if (!displayName && !email && !password && !confirmPassword) {
+            setFormErrors({ displayName: "Please enter a username", email: "Please enter a email", password: "Please enter a password", confirmPassword: "Please enter your confirm password" });
         }
-
-        if (username && email && password && confirmPassword) {
-            try {
-                await createAuthWithEmailAndPassword(email, password)
-                navigate('/')
-            } catch (error) {
-                console.log(error)
+        try {
+            const { user } = await createAuthWithEmailAndPassword(email, password);
+            await createUserDocumentFromAuth(user, { displayName })
+        } catch (error) {
+            if (error.code === "auth/email-already-in-use") {
+                alert("Email already in use")
             }
         }
-
     }
 
     const handleOnChange = (event) => {
         const { name, value } = event.target;
         let errors = { ...formErrors }
         switch (name) {
-            case 'username':
-                errors.username = /^\d/.test(value) ? "Username is invalid" : ""
+            case 'displayName':
+                errors.displayName = /^\d/.test(value) ? "username is invalid" : ""
                 break;
             case 'email':
                 errors.email = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value) ? "" : "The email is not valid"
@@ -90,8 +90,8 @@ function RegisterForm() {
             </h2>
             <form className="" onSubmit={handleSubmitForm}>
                 <div className="flex flex-col w-[400px]">
-                    <FormInput type='text' placeholder="username" label="username" name="username" value={username} onChange={handleOnChange} />
-                    {formErrors.username && <span className="text-red-600">{formErrors.username}</span>}
+                    <FormInput type='text' placeholder="displayName" label="Display Name" name="displayName" value={displayName} onChange={handleOnChange} />
+                    {formErrors.displayName && <span className="text-red-600">{formErrors.displayName}</span>}
                     <FormInput type='text' placeholder="email" label="email" name="email" value={email} onChange={handleOnChange} />
                     {formErrors.email && <span className="text-red-600">{formErrors.email}</span>}
 

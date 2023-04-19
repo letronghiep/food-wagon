@@ -5,12 +5,10 @@ import storage from 'redux-persist/lib/storage';
 import logger from 'redux-logger';
 
 const middleWares = [process.env.NODE_ENV !== 'production' && logger].filter(Boolean)
-
-
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['cart']
+  whitelist: ['cart', 'user']
 }
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)

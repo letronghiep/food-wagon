@@ -1,7 +1,7 @@
 import { initializeApp } from "firebase/app";
 
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
-import { doc, getDoc, getFirestore, setDoc } from 'firebase/firestore'
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut, updateProfile, updatePassword } from "firebase/auth";
+import { doc, getDoc, getFirestore, setDoc, updateDoc } from 'firebase/firestore'
 
 const firebaseConfig = {
     apiKey: "AIzaSyAPZMqlAfZWHiDWwZPpw8yVgxGaMyz0TaU",
@@ -14,35 +14,60 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const firebaseApp = initializeApp(firebaseConfig);
-const db = getFirestore()
+const db = getFirestore(firebaseApp)
 export const auth = getAuth()
 
-export const createAuthWithEmailAndPassword = async (email, password) => {
-    if (!email || !password) return;
-    return await createUserWithEmailAndPassword(auth, email, password);
-}
 
 export const createUserDocumentFromAuth = async (userAuth, additionalInformation = {}) => {
     if (!userAuth) return;
-    const userDocRef = doc(db, 'users', userAuth.uid)
+    const userDocRef = doc(db, 'users', userAuth.uid);
     const userSnapshot = await getDoc(userDocRef);
+    let userData = {};
     if (!userSnapshot.exists()) {
-        const { displayName, email } = userAuth;
         const createAt = new Date();
+        const { displayName, email, uid } = userAuth;
         try {
-            setDoc(userDocRef, {
+            await setDoc(userDocRef, {
+                uid,
                 displayName,
                 email,
                 createAt,
                 ...additionalInformation
             })
+            userData = {
+                uid,
+                displayName,
+                email,
+                createAt,
+                ...additionalInformation
+            };
         } catch (error) {
             console.log(error)
         }
+    } else {
+        userData = userSnapshot.data();
+        console.log("User data lay duoc ne:", userData);
+        await updateDoc(userDocRef, {
+            ...userData
+        });
     }
-}
 
+    return userData;
+}
+export const createAuthWithEmailAndPassword = async (email, password) => {
+    if (!email || !password) return;
+    return await createUserWithEmailAndPassword(auth, email, password);
+}
 export const signInAuthWithEmailAndPassword = async (email, password) => {
     if (!email || !password) return;
     return await signInWithEmailAndPassword(auth, email, password)
+}
+
+export const onChangePassword = async (userAuth, newPassWord) => {
+    return await userAuth.updatePassword(newPassWord)
+}
+
+export const signOutUser = async () => await signOut(auth);
+export const onAuthStateChange = (callback) => {
+    return onAuthStateChanged(auth, callback)
 }

@@ -5,7 +5,7 @@ import { Route, Routes } from 'react-router-dom'
 import { setCategories } from '../store/categories/categoriesSlice'
 
 import CategoriesPreview from '~/components/CategoriesPreview'
-import CategoriesPage from './CategoriesPage'
+import CategoriesPage from '../routes/CategoriesPage'
 
 
 

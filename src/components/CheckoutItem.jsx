@@ -2,10 +2,8 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Add, Clear, Remove } from '@mui/icons-material'
 import { addItemToCart, clearItemFromCart, removeItemFromCart } from '../store/cart/cartSlice';
-import { selectCartItems } from '../store/cart/cartSelector';
-import store from '../store/store';
 
-function CheckoutItem({ cartItem }) {
+function CheckoutItem({ cartItem, className }) {
     const dispatch = useDispatch();
     const { name, price, discount, imageUrl, quantity } = cartItem;
 
@@ -24,7 +22,7 @@ function CheckoutItem({ cartItem }) {
     };
 
     return (
-        <div className='flex items-center p-3 w-full min-h-[100px] border-b'>
+        <div className={className}>
             <div className='flex items-center w-[23%]'>
                 <img className='object-cover rounded-md overflow-hidden h-[200px] w-[200px]' src={imageUrl} alt={name} />
             </div>
@@ -39,7 +37,6 @@ function CheckoutItem({ cartItem }) {
 
             <div className='w-[23%]'>
                 {discount ? <span className='text-xl ml-4'>{(price - price * discount / 100) * quantity}</span> : <span className='text-xl ml-4'>{price * quantity}</span>}
-                {/* <span className='text-xl ml-4'>{price * quantity}</span> */}
             </div>
             <div className='w-[8%] flex items-center justify-center cursor-pointer'>
                 <Clear onClick={handlerClearItem} />

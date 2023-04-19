@@ -1,14 +1,16 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import FormInput from '../components/FormInput'
-import { signInAuthWithEmailAndPassword } from '../utils/firebase/firebase'
+import { auth, createAuthWithEmailAndPassword, createUserDocumentFromAuth, getUserDocumentFromAuth, signInAuthWithEmailAndPassword } from '../utils/firebase/firebase'
+import { useDispatch } from 'react-redux'
+import { login, setCurrentUser } from '../store/user/userSlice'
+import { signInWithEmailAndPassword } from 'firebase/auth'
 
 function LoginForm() {
   const defaultFormField = {
     email: '',
     password: ''
   }
-
   const navigate = useNavigate()
   const [formField, setFormField] = useState(defaultFormField);
   const [formErrors, setFormErrors] = useState(defaultFormField);
@@ -33,7 +35,9 @@ function LoginForm() {
 
     if (email && password) {
       try {
-        await signInAuthWithEmailAndPassword(email, password);
+        const { user } = await signInAuthWithEmailAndPassword(email, password);
+        console.log(user);
+        await createUserDocumentFromAuth(user);
         navigate('/')
       } catch (error) {
         switch (error.code) {
@@ -49,6 +53,7 @@ function LoginForm() {
         console.log(error);
       }
     }
+
     console.log(formErrors)
 
   }

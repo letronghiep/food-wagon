@@ -18,7 +18,7 @@ function BestCard({ card, className }) {
 
                 </div>
                 <p className='text-xl'>{desc}</p>
-                <Button onClick={onNavigateHandler} children="Proceed to order" RightIcon={ChevronRight} className="bg-amber-400 p-2.5 font-bold text-white text-base flex items-center justify-center mx-auto w-full uppercase mt-8 hover:bg-orange-400 rounded-md" />
+                <Button onClick={onNavigateHandler} children="Proceed to order" RightIcon={<ChevronRight />} className="bg-amber-400 p-2.5 font-bold text-white text-base flex items-center justify-center mx-auto w-full uppercase mt-8 hover:bg-orange-400 rounded-md" />
 
             </div>
             <img className='h-[477px] object-cover flex-[2]' src={imageUrl} alt={title} width='646px' />
