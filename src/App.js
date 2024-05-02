@@ -8,7 +8,6 @@ import Checkout from './routes/Checkout';
 import MainLayout from './routes/MainLayout';
 import Auth from './pages/Auth';
 import Discount from './routes/Discount';
-import Profile from './routes/Profile';
 import { setCurrentUser } from './store/user/userSlice';
 import Account from './pages/Account';
 function App() {

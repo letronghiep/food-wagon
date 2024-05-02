@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 
 function DropDownItem({ cartItem }) {
     const { name, price, discount, imageUrl, quantity } = cartItem
@@ -18,4 +18,4 @@ function DropDownItem({ cartItem }) {
     )
 }
 
-export default DropDownItem
+export default memo(DropDownItem)
